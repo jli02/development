@@ -1,0 +1,17 @@
+[
+  {
+    "name": "shirt",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "clothing"
+  },
+  {
+    "name": "pants",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "clothing"
+  },
+  {
+    "name": "toothbrush",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "toiletries"
+  }
+]
