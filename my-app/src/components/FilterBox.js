@@ -272,6 +272,7 @@ export function FilterBox(props) {
           <span class="body-text">alphabetical order</span>
         </div>
       </div>
+      <br></br>
       <button onClick={() => reset()} class="reset-button">
         <h2 class="button-text">reset filter and sort</h2>
       </button>
