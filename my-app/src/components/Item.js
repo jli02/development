@@ -6,14 +6,41 @@ import { useState } from "react";
  * @returns
  */
 export function Item(props) {
-  const { name, image, category, addToList, removeButton, altText } = props;
+  const {
+    name,
+    image,
+    category,
+    importance,
+    altText,
+    toPackList,
+    setToPackList,
+    packItemNames,
+    setPackItemNames,
+  } = props;
+
+  const addToList = (name) => {
+    console.log("add");
+    console.log(props.toPackList);
+    var copyMap = new Map(props.toPackList);
+    copyMap.set(name, props.toPackList.get(name) + 1);
+    setToPackList(copyMap);
+
+    if (!props.packItemNames.includes(name)) {
+      props.setPackItemNames([...props.packItemNames, name]);
+    }
+  };
 
   return (
     <div className="item">
       <img class="image" alt={altText} src={image} />
       <h1 class="header">{name}</h1>
-      <h2>{category}</h2>
-      <button onClick={() => addToList(name)}>Add To List</button>
+      <div class="category">
+        <h2 class="body-text">{category}</h2>
+      </div>
+      <h2 class="body-text">level of importance: {importance}</h2>
+      <button onClick={() => addToList(name)} class="button">
+        <h2 class="button-text">add to list</h2>
+      </button>
     </div>
   );
 }

@@ -1,112 +1,77 @@
+import { itemMap } from "../App.js";
+
 export function PackingList(props) {
-  const { toPackList, setToPackList } = props;
+  const { toPackList, setToPackList, packItemNames, setPackItemNames } = props;
 
   const removeItem = (item, index) => {
-    props.setToPackList((toPackList) => {
-      return props.toPackList.filter((item, i) => i !== index);
-    });
+    const newItemList = props.packItemNames.filter((item, i) => i !== index);
+    props.setPackItemNames(newItemList);
+
+    var copyMap = new Map(props.toPackList);
+    copyMap.set(item, 0);
+    setToPackList(copyMap);
   };
 
-  const displayEmptyMessage = () => {
-    for (let key in props.toPackList) {
-      console.log("greater than 0" + props.toPackList.get(key) > 0);
-      if (props.toPackList.get(key) === 0) {
-        return false;
-      }
+  const showList = () => {
+    console.log("showing list");
+    console.log(props.toPackList);
+    console.log("show, packitemnames" + props.packItemNames);
+
+    if (props.packItemNames.length === 0) {
+      console.log("to pack list is empty");
+      return <p class="body-text">your to pack list is empty</p>;
+    } else {
+      const itemList = props.packItemNames.map((item, index) => {
+        return (
+          <div class="list-item">
+            <p key={index} class="body-text">
+              {item}, quantity: {toPackList.get(item)}
+            </p>
+            <button
+              onClick={() => removeItem(item, index)}
+              class="remove-button"
+            >
+              remove
+            </button>
+          </div>
+        );
+      });
+      return itemList;
     }
-
-    return true;
   };
-
-  //   const showList = () => {
-  //     return toPackList;
-  //   };
-  //   //     // if (displayEmptyMessage()) {
-  //     //   console.log("to pack list is empty");
-  //     //   return <p class="body-text">your to pack list is empty</p>;
-  //     // } else {
-  //     //     for (let key in props.toPackList) {
-  //     //         if (props.toPackList)
-  //     //     }
-
-  //     //     props.toPackList.size === 0) {
-  //     //   console.log("to pack list is empty");
-  //     //   return <p class="body-text">your to pack list is empty</p>;
-  //     // }
-
-  //     // toPackListItems = [];
-  //     // for (let key in props.toPackList) {
-
-  //     //   console.log(key);
-  //     //   console.log(props.toPackList.get(key));
-  //     //   return (
-  //     //     <div>
-  //     //       <p class="body-text">
-  //     //         {key} and {props.toPackList.get(key)}
-  //     //       </p>
-  //     //     </div>
-  //     //   );
-  //     // }
-  //     // }
-
-  //     console.log("keys" + props.toPackList.keys());
-  //     console.log("showing list");
-
-  //     const toPackItemsList = props.toPackList.keys().map((name, index) => {
-  //       return (
-  //         <div>
-  //           <p key={index} class="body-text">
-  //             {/* {toPackItem.name}, amount: {toPackList[index].count} */}
-  //             {name}, quantity: {props.toPackList.get(name)}
-  //           </p>
-  //           {/* <button
-  //             onClick={() => {
-  //               removeItem(name, index);
-  //             }}
-  //           >
-  //             remove
-  //           </button> */}
-  //           {/* <button
-  //             onClick={() => {
-  //               packItem(toPackItem, index);
-  //             }}
-  //           >
-  //             already packed
-  //           </button> */}
-  //         </div>
-  //       );
-  //     });
-
-  //     console.log("showing list");
-
-  //     console.log("pack length:" + props.toPackList.length);
-  //     return props.toPackList.get("pants");
-  //   };
 
   const calculateItemsToPack = () => {
+    console.log("calculate total");
     var items = 0;
-    for (let i = 0; i < props.toPackList.length; i++) {
-      items += 1;
-      // items = items + toPackList[i].count;
+    for (let i = 0; i < props.packItemNames.length; i++) {
+      var num = props.toPackList.get(packItemNames[i]);
+      items = items + num;
     }
-    return <p class="body-text">Total number of items to pack: {items}</p>;
+    return (
+      <p class="body-text">
+        <br></br>
+        <b>total number of items to pack: {items}</b>
+      </p>
+    );
   };
 
   const resetToPack = () => {
-    props.setToPackList([]);
+    props.setToPackList(itemMap);
+    props.setPackItemNames([]);
   };
 
   return (
-    <div>
-      <h2>to pack:</h2>
-      {/* {showList()} */}
+    <div class="packing-list">
+      <h1 class="header">to pack:</h1>
+      {showList()}
       {calculateItemsToPack()}
       <button
         onClick={() => {
           resetToPack();
         }}
+        class="reset-button"
       >
-        clear all
+        <h2 class="button-text">clear all</h2>
       </button>
     </div>
   );

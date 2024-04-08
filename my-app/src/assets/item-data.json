@@ -2,16 +2,85 @@
   {
     "name": "shirt",
     "image": "my-app/src/assets/suitcase.jpg",
-    "category": "clothing"
+    "category": "clothing",
+    "importance": 1
   },
   {
     "name": "pants",
     "image": "my-app/src/assets/suitcase.jpg",
-    "category": "clothing"
+    "category": "clothing",
+    "importance": 1
   },
   {
     "name": "toothbrush",
     "image": "my-app/src/assets/suitcase.jpg",
-    "category": "toiletries"
+    "category": "toiletries",
+    "importance": 1
+  },
+  {
+    "name": "watch",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "accessories",
+    "importance": 3
+  },
+  {
+    "name": "laptop",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "devices",
+    "importance": 1
+  },
+  {
+    "name": "socks",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "clothing",
+    "importance": 1
+  },
+  {
+    "name": "book",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "miscellaneous",
+    "importance": 3
+  },
+  {
+    "name": "underwear",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "clothing",
+    "importance": 1
+  },
+  {
+    "name": "hat",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "accessories",
+    "importance": 3
+  },
+  {
+    "name": "face towel",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "toiletries",
+    "importance": 2
+  },
+  {
+    "name": "toothpaste",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "toiletries",
+    "importance": 3
+  },
+  {
+    "name": "headphones",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "miscellaneous",
+    "importance": 2
+  },
+  {
+    "name": "journal",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "miscellaneous",
+    "importance": 2
+  },
+  {
+    "name": "ipad",
+    "image": "my-app/src/assets/suitcase.jpg",
+    "category": "devices",
+    "importance": 2
   }
 ]
