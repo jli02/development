@@ -1,6 +1,6 @@
 # cs1300 development project
 
-Link to deployed site: https://development-ten-gules.vercel.app/
+Link to deployed site: https://development-2.vercel.app/
 
 ## How to Run
 
