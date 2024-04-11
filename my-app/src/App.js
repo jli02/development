@@ -8,7 +8,6 @@ import itemData from "./assets/item-data.json";
 import { PackingList } from "./components/PackingList";
 
 // map of items for keeping track of how many of each we have
-
 export let itemMap = new Map([
   ["shirt", 0],
   ["pants", 0],
@@ -33,6 +32,7 @@ function App() {
   // state variable for the running list of added items
   const [toPackList, setToPackList] = useState(itemMap);
 
+  // state variable to keep track of which item names are in the aggregator
   const [packItemNames, setPackItemNames] = useState([]);
 
   const [filteredItems, setFilteredItems] = useState(itemData);
@@ -47,29 +47,33 @@ function App() {
 
   return (
     <div className="App">
-      <h1 class="title">What do you need to pack?</h1>
-
+      <div>
+        <h1 class="title">What do you need to pack?</h1>
+      </div>
       <div class="main">
-        <div class="filter-box">
-          <FilterBox
-            data={itemData}
-            setData={setData}
-            filteredItems={filteredItems}
-            setFilteredItems={setFilteredItems}
-          ></FilterBox>
+        <div class="filter-and-items">
+          <div class="filter-box">
+            <FilterBox
+              data={itemData}
+              setData={setData}
+              filteredItems={filteredItems}
+              setFilteredItems={setFilteredItems}
+            ></FilterBox>
+          </div>
+          <div class="all-items-and-title">
+            <div class="all-items">
+              <Items
+                data={itemData}
+                toPackList={toPackList}
+                setToPackList={setToPackList}
+                packItemNames={packItemNames}
+                setPackItemNames={setPackItemNames}
+                filteredItems={filteredItems}
+              ></Items>
+            </div>
+          </div>
         </div>
-        <div>
-          <Items
-            data={itemData}
-            toPackList={toPackList}
-            setToPackList={setToPackList}
-            packItemNames={packItemNames}
-            setPackItemNames={setPackItemNames}
-            filteredItems={filteredItems}
-          ></Items>
-        </div>
-
-        <div>
+        <div class="packing-list">
           <PackingList
             toPackList={toPackList}
             setToPackList={setToPackList}

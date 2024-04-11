@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 
+/**
+ * function representing entire filter box, including filter and sort buttons
+ * @param {*} props
+ * @returns
+ */
 export function FilterBox(props) {
   const { data, setData, filteredItems, setFilteredItems } = props;
-  // filter - category
-  // clothing, accessories, toiletries, devices, miscellaneous
-  // filter - importance
-
-  // sort - alphabetical order
 
   const [checkedClothing, setCheckedClothing] = useState(false);
   const [checkedToiletries, setCheckedToiletries] = useState(false);
@@ -20,7 +20,6 @@ export function FilterBox(props) {
 
   const [checkedAlphabetical, setCheckedAlphabetical] = useState(false);
 
-  // do i need to make a copy of all of the items here?
   const handleClothing = () => {
     setCheckedClothing(!checkedClothing);
   };
@@ -75,7 +74,6 @@ export function FilterBox(props) {
         (item.importance == 2 && checkedImp2) ||
         (item.importance == 3 && checkedImp3)
       ) {
-        console.log("important selected");
         importanceSelected = true;
       }
       return importanceSelected;
@@ -111,23 +109,18 @@ export function FilterBox(props) {
       (item.importance == 2 && checkedImp2) ||
       (item.importance == 3 && checkedImp3)
     ) {
-      console.log("important selected");
       importanceSelected = true;
     }
     return categorySelected && importanceSelected;
   };
 
   const sortAlphabetically = (items) => {
-    console.log(items);
     var sortedList = items.sort((a, b) => a.name.localeCompare(b.name));
     return sortedList;
   };
 
   // there is probably a more efficient way to do this...
   const filterItems = () => {
-    console.log("filtering");
-    console.log("selected" + selected);
-
     //bug where it is not sorting alphabetically when it's just the regular data...
     if (
       !checkedClothing &&
@@ -148,7 +141,6 @@ export function FilterBox(props) {
       }
     } else {
       const filteredList = props.data.filter((item) => selected(item));
-      console.log("filtered list" + filteredList);
       props.setFilteredItems(filteredList);
       if (!checkedAlphabetical) {
         props.setFilteredItems(filteredList);
@@ -193,89 +185,127 @@ export function FilterBox(props) {
 
   return (
     <div class="filter-box">
-      <div class="filter-buttons">
-        <h1 class="header">filter items: </h1>
+      <div class="selection-buttons">
+        <div class="filter-buttons">
+          <h1 class="header">filter items: </h1>
 
-        <h2 class="body-text">
-          <b>category</b>
-        </h2>
-        <div class="checkboxes">
-          <div>
-            <input
-              type="checkbox"
-              value={checkedClothing}
-              onChange={handleClothing}
-            />
-            <span class="body-text">clothing</span>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              value={checkedToiletries}
-              onChange={handleToiletries}
-            />
-            <span class="body-text">toiletries</span>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              value={checkedAccessories}
-              onChange={handleAccessories}
-            />
-            <span class="body-text">accessories</span>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              value={checkedDevices}
-              onChange={handleDevices}
-            />
-            <span class="body-text">devices</span>
-          </div>
-          <div>
-            <input type="checkbox" value={checkedMisc} onChange={handleMisc} />
-            <span class="body-text">miscellaneous</span>
+          <div class="checkboxes">
+            <div class="category-checkboxes">
+              <h2 class="body-text">
+                <b>category</b>
+              </h2>
+              <div>
+                <input
+                  type="checkbox"
+                  value={checkedClothing}
+                  onChange={handleClothing}
+                  aria-label="clothing checkbox"
+                />
+                <span class="body-text">clothing</span>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  value={checkedToiletries}
+                  onChange={handleToiletries}
+                  aria-label="toiletries checkbox"
+                />
+                <span class="body-text">toiletries</span>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  value={checkedAccessories}
+                  onChange={handleAccessories}
+                  aria-label="accessories checkbox"
+                />
+                <span class="body-text">accessories</span>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  value={checkedDevices}
+                  onChange={handleDevices}
+                  aria-label="devices checkbox"
+                />
+                <span class="body-text">devices</span>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  value={checkedMisc}
+                  onChange={handleMisc}
+                  aria-label="miscellaneous checkbox"
+                />
+                <span class="body-text">miscellaneous</span>
+              </div>
+            </div>
+
+            <br></br>
+            <div class="importance-checkboxes">
+              <h2 class="body-text">
+                <b>importance</b>
+                <h2 class="note-text">
+                  <b>
+                    *on scale of 1 being most important and 3 being least
+                    important
+                  </b>
+                </h2>
+              </h2>
+
+              <div>
+                <input
+                  type="checkbox"
+                  value={checkedImp1}
+                  onChange={handleImp1}
+                  aria-label="checkbox for very important items"
+                />
+                <span class="body-text">very important (1)</span>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  value={checkedImp2}
+                  onChange={handleImp2}
+                  aria-label="checkbox for somewhat important items"
+                />
+                <span class="body-text">somewhat important (2)</span>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  value={checkedImp3}
+                  onChange={handleImp3}
+                  aria-label="checkbox for not very important items"
+                />
+                <span class="body-text">not very important (3)</span>
+              </div>
+            </div>
           </div>
         </div>
-        <br></br>
-        <h2 class="body-text">
-          <b>importance</b>
-          <h2 class="note-text">
-            <b>
-              *on scale of 1 being most important and 3 being least important
-            </b>
-          </h2>
-        </h2>
-        <div class="checkboxes">
+        <div class="sort-buttons">
+          <h1 class="header">sort items:</h1>
           <div>
-            <input type="checkbox" value={checkedImp1} onChange={handleImp1} />
-            <span class="body-text">very important (1)</span>
+            <input
+              type="checkbox"
+              value={checkedAlphabetical}
+              onChange={handleAlphabetical}
+              aria-label="checkbox to sort by alphabetical order"
+            />
+            <span class="body-text">alphabetical order</span>
           </div>
-          <div>
-            <input type="checkbox" value={checkedImp2} onChange={handleImp2} />
-            <span class="body-text">somewhat important (2)</span>
-          </div>
-          <div>
-            <input type="checkbox" value={checkedImp3} onChange={handleImp3} />
-            <span class="body-text">not very important (3)</span>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h1 class="header">sort items:</h1>
-        <div>
-          <input
-            type="checkbox"
-            value={checkedAlphabetical}
-            onChange={handleAlphabetical}
-          />
-          <span class="body-text">alphabetical order</span>
         </div>
       </div>
       <br></br>
-      <button onClick={() => reset()} class="reset-button">
-        <h2 class="button-text">reset filter and sort</h2>
-      </button>
+      <div class="reset-filter-sort-button">
+        <button
+          onClick={() => reset()}
+          class="reset-button"
+          aria-label="reset filter and sort button"
+        >
+          <h2 class="button-text">reset filter and sort</h2>
+        </button>
+      </div>
     </div>
   );
 }

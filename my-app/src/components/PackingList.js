@@ -1,5 +1,10 @@
 import { itemMap } from "../App.js";
 
+/**
+ * function representing aggregator where items are added
+ * @param {*} props
+ * @returns
+ */
 export function PackingList(props) {
   const { toPackList, setToPackList, packItemNames, setPackItemNames } = props;
 
@@ -13,10 +18,6 @@ export function PackingList(props) {
   };
 
   const showList = () => {
-    console.log("showing list");
-    console.log(props.toPackList);
-    console.log("show, packitemnames" + props.packItemNames);
-
     if (props.packItemNames.length === 0) {
       console.log("to pack list is empty");
       return <p class="body-text">your to pack list is empty</p>;
@@ -61,11 +62,12 @@ export function PackingList(props) {
   };
 
   return (
-    <div class="packing-list">
+    <div>
       <h1 class="header">to pack:</h1>
       {showList()}
       {calculateItemsToPack()}
       <button
+        aria-label="reset packing list button"
         onClick={() => {
           resetToPack();
         }}

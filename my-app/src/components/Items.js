@@ -1,7 +1,11 @@
 import { Item } from "./Item";
-import itemData from "../assets/item-data.json";
 import img from "../assets/cat.jpg";
 
+/**
+ * function representing the collection of available items
+ * @param {*} props
+ * @returns
+ */
 export function Items(props) {
   const {
     data,
